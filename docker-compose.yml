@@ -1,0 +1,27 @@
+version: "3.11"
+networks:
+  projectnet:
+    driver: bridge
+services:
+  frontend:
+    container_name: project-frontend
+    build: frontend
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend
+    environment:
+      - API_ENDPOINT=http://backend:8000
+    volumes:
+      - ./frontend:/app
+    networks:
+      - projectnet
+  backend:
+    container_name: project-backend
+    ports:
+      - 8000:8000
+    build: backend
+    networks:
+      - projectnet
+    volumes:
+      - ./backend:/app
