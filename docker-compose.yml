@@ -25,3 +25,12 @@ services:
       - projectnet
     volumes:
       - ./backend:/app
+  usuarios:
+    container_name: project-usuarios
+    ports:
+      - 8201:8201
+    build: usuarios
+    networks:
+      - projectnet
+    volumes:
+      - ./usuarios:/app
